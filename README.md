@@ -83,44 +83,40 @@ Once the broker is up and running and Home Assistant is able to connect to it yo
 Use the following code for this.
 
 ```yaml
-sensor:
-  # Espresso timer Mara X
-  - platform: mqtt
-    name: Marax Brew Temp
-    state_topic: "/marax/hx" 
-    unit_of_measurement: "C"
-  - platform: mqtt
-    name: Marax Steam Temp
-    state_topic: "/marax/steam" 
-    unit_of_measurement: "C"
-  - platform: mqtt
-    name: Marax Shot Timer
-    state_topic: "/marax/shot"
-    unit_of_measurement: "Seconds"
-    state_class: measurement
-
-binary_sensor:
-    #Espresso timer Mara X
-  - platform: mqtt
-    name: Marax Machine power
-    state_topic: "/marax/power"
-    payload_on: 'on'
-    payload_off: 'off' 
-  - platform: mqtt
-    name: Marax Machine pump
-    state_topic: "/marax/pump"
-    payload_on: 'on'
-    payload_off: 'off'
-  - platform: mqtt
-    name: Marax Heating
-    state_topic: "/marax/machineheating"
-    payload_on: 'on'
-    payload_off: 'off'
-  - platform: mqtt
-    name: Marax Steam Boost
-    state_topic: "/marax/machineheatingboost"
-    payload_on: 'on'
-    payload_off: 'off'
+mqtt:
+  - sensor:
+      name: "BrewTemp"
+      state_topic: "/marax/hx"
+      unit_of_measurement: "C"
+  - sensor:
+      name: "SteamTemp"
+      state_topic: "/marax/steam"
+      unit_of_measurement: "C"
+  - sensor:
+      name: "MaraX Shot Timer"
+      state_topic: "/marax/shot"
+      unit_of_measurement: "Seconds"
+      state_class: measurement
+  - binary_sensor: 
+      name: "Marax Machine power"
+      state_topic: "/marax/power"
+      payload_on: "on"
+      payload_off: "off"
+  - binary_sensor: 
+      name: "Marax Machine pump"
+      state_topic: "/marax/pump"
+      payload_on: "on"
+      payload_off: "off"
+  - binary_sensor: 
+      name: "Marax Heating"
+      state_topic: "/marax/machineheating"
+      payload_on: "on"
+      payload_off: "off"
+  - binary_sensor: 
+      name: "Marax Steam Boost"
+      state_topic: "/marax/machineheatingboost"
+      payload_on: "on"
+      payload_off: "off"
 ```
 
 When all this is done reboot the Home Assistant server and you will then be able to use the MQTT sensors in cards as in the following picture.
